@@ -1,77 +1,93 @@
 import { useState } from "react";
-import { ChefHat } from "lucide-react";
+import { ChefHat, Leaf } from "lucide-react";
+import cuisineGujarati from "@/assets/cuisine-gujarati.jpg";
+import cuisinePunjabi from "@/assets/cuisine-punjabi.jpg";
+import cuisineThai from "@/assets/cuisine-thai.jpg";
+import dishBiryani from "@/assets/dish-biryani.jpg";
 
-const menuData = {
-  starters: [
-    { name: "Paneer Tikka", description: "Marinated cottage cheese grilled in tandoor with bell peppers", price: "₹295", veg: true },
-    { name: "Chicken Malai Tikka", description: "Creamy, succulent chicken pieces with mild spices", price: "₹345", veg: false },
-    { name: "Seekh Kebab", description: "Minced lamb skewers with aromatic Awadhi spices", price: "₹395", veg: false },
-    { name: "Dahi Ke Kebab", description: "Soft, melt-in-mouth yogurt and paneer kebabs", price: "₹275", veg: true },
-    { name: "Galouti Kebab", description: "Legendary Lucknowi minced lamb kebabs with over 100 spices", price: "₹445", veg: false },
-    { name: "Hara Bhara Kebab", description: "Spinach and green pea patties with mint chutney", price: "₹245", veg: true },
-    { name: "Tandoori Prawns", description: "Jumbo prawns marinated in tangy spices, grilled to perfection", price: "₹595", veg: false },
-    { name: "Mutton Shammi Kebab", description: "Tender minced mutton with lentils and aromatic spices", price: "₹395", veg: false },
-  ],
-  mains: [
-    { name: "Murgh Makhani", description: "Butter chicken in rich tomato-cream sauce with fenugreek", price: "₹495", veg: false },
-    { name: "Rogan Josh", description: "Kashmiri-style lamb curry with aromatic spices", price: "₹545", veg: false },
-    { name: "Paneer Lababdar", description: "Cottage cheese in rich tomato and cashew gravy", price: "₹395", veg: true },
-    { name: "Dal Makhani", description: "Black lentils slow-cooked overnight with butter and cream", price: "₹295", veg: true },
-    { name: "Mutton Korma", description: "Tender mutton in aromatic white gravy with nuts", price: "₹595", veg: false },
-    { name: "Palak Paneer", description: "Cottage cheese cubes in creamy spinach gravy", price: "₹345", veg: true },
-    { name: "Chicken Handi", description: "Chicken cooked in traditional clay pot with rich spices", price: "₹475", veg: false },
-    { name: "Shahi Paneer", description: "Royal paneer curry with cream, nuts and saffron", price: "₹375", veg: true },
-    { name: "Nihari", description: "Slow-cooked lamb shank stew, the royal breakfast of Nawabs", price: "₹625", veg: false },
-    { name: "Dum Aloo Kashmiri", description: "Baby potatoes in rich yogurt-based Kashmiri gravy", price: "₹295", veg: true },
-  ],
-  biryani: [
-    { name: "Lucknowi Lamb Biryani", description: "Slow-cooked lamb with saffron basmati rice and whole spices", price: "₹595", veg: false },
-    { name: "Hyderabadi Chicken Biryani", description: "Fragrant rice layered with spiced chicken and crispy onions", price: "₹495", veg: false },
-    { name: "Paneer Biryani", description: "Aromatic rice with marinated cottage cheese and mint", price: "₹395", veg: true },
-    { name: "Gosht Biryani", description: "Traditional mutton biryani with royal spices", price: "₹625", veg: false },
-    { name: "Vegetable Pulao", description: "Fragrant rice with garden vegetables and mild spices", price: "₹295", veg: true },
-  ],
-  breads: [
-    { name: "Butter Naan", description: "Soft leavened bread brushed with butter", price: "₹65", veg: true },
-    { name: "Garlic Naan", description: "Naan topped with fresh garlic and coriander", price: "₹75", veg: true },
-    { name: "Laccha Paratha", description: "Layered whole wheat bread with ghee", price: "₹70", veg: true },
-    { name: "Keema Naan", description: "Naan stuffed with spiced minced lamb", price: "₹145", veg: false },
-    { name: "Cheese Naan", description: "Naan filled with melted cheese", price: "₹95", veg: true },
-    { name: "Tandoori Roti", description: "Whole wheat bread from clay oven", price: "₹45", veg: true },
-    { name: "Sheermal", description: "Saffron-flavored sweet bread", price: "₹85", veg: true },
-    { name: "Roomali Roti", description: "Paper-thin handkerchief bread", price: "₹55", veg: true },
-  ],
-  desserts: [
-    { name: "Gulab Jamun", description: "Warm milk dumplings soaked in rose-scented syrup", price: "₹145", veg: true },
-    { name: "Shahi Tukda", description: "Royal bread pudding with rabri and nuts", price: "₹195", veg: true },
-    { name: "Phirni", description: "Creamy rice pudding with saffron and cardamom", price: "₹165", veg: true },
-    { name: "Kulfi Falooda", description: "Traditional Indian ice cream with vermicelli", price: "₹195", veg: true },
-    { name: "Gajar Ka Halwa", description: "Warm carrot pudding with nuts and khoya", price: "₹175", veg: true },
-    { name: "Rasmalai", description: "Soft cottage cheese dumplings in sweet saffron milk", price: "₹185", veg: true },
-  ],
-  beverages: [
-    { name: "Masala Chai", description: "Traditional spiced Indian tea", price: "₹75", veg: true },
-    { name: "Mango Lassi", description: "Creamy yogurt drink with Alphonso mango", price: "₹145", veg: true },
-    { name: "Rose Sharbat", description: "Refreshing rose-flavored drink", price: "₹95", veg: true },
-    { name: "Thandai", description: "Traditional nut and spice infused milk", price: "₹165", veg: true },
-    { name: "Fresh Lime Soda", description: "Sparkling lime with a hint of mint", price: "₹85", veg: true },
-    { name: "Kashmiri Kahwa", description: "Saffron green tea with almonds and cinnamon", price: "₹125", veg: true },
-  ],
-};
+interface MenuItem {
+  name: string;
+  description: string;
+  price: string;
+  veg: boolean;
+}
 
-type Category = keyof typeof menuData;
+interface Cuisine {
+  id: string;
+  name: string;
+  tagline: string;
+  description: string;
+  image: string;
+  items: MenuItem[];
+}
+
+const cuisines: Cuisine[] = [
+  {
+    id: "gujarati",
+    name: "Gujarati Cuisine",
+    tagline: "Authentic Flavors of Gujarat",
+    description: "Experience the vibrant, home-style cooking of Gujarat with its perfect balance of sweet, sour, and spicy flavors. Our Gujarati thali brings together traditional recipes passed down through generations.",
+    image: cuisineGujarati,
+    items: [
+      { name: "Undhiyu", description: "Traditional mixed vegetable preparation with fenugreek dumplings, cooked in earthen pot", price: "₹345", veg: true },
+      { name: "Kathiyawadi Sabzi", description: "Rustic spiced vegetables in authentic Kathiyawadi style with garlic and red chillies", price: "₹285", veg: true },
+      { name: "Rotla with Ringan", description: "Millet flatbread served with smoky roasted brinjal and fresh garlic chutney", price: "₹225", veg: true },
+      { name: "Dal Baati", description: "Crispy wheat balls served with five-lentil dal and churma sweet", price: "₹295", veg: true },
+      { name: "Kadhi Khichdi", description: "Comfort food combination of yogurt curry with rice and lentils", price: "₹265", veg: true },
+      { name: "Gujarati Thali", description: "Complete meal with rotli, dal, sabzi, rice, kadhi, farsan, and sweets", price: "₹495", veg: true },
+    ],
+  },
+  {
+    id: "punjabi",
+    name: "Punjabi Cuisine",
+    tagline: "Rich & Robust North Indian Flavors",
+    description: "Indulge in the hearty, butter-rich flavors of Punjab. Our chefs bring authentic dhaba-style cooking with premium ingredients and traditional tandoor techniques.",
+    image: cuisinePunjabi,
+    items: [
+      { name: "Butter Chicken", description: "Tender chicken in silky tomato-cream sauce with fenugreek and butter", price: "₹495", veg: false },
+      { name: "Paneer Butter Masala", description: "Cottage cheese cubes in rich, creamy tomato gravy with cashew paste", price: "₹395", veg: true },
+      { name: "Dal Makhani", description: "Black lentils slow-cooked overnight with butter, cream, and aromatic spices", price: "₹295", veg: true },
+      { name: "Tandoori Roti & Naan", description: "Assorted clay oven breads: butter naan, garlic naan, and tandoori roti", price: "₹145", veg: true },
+      { name: "Tandoori Chicken", description: "Half chicken marinated in yogurt and spices, char-grilled in tandoor", price: "₹445", veg: false },
+      { name: "Amritsari Fish", description: "Crispy batter-fried fish fillets with carom seeds and chaat masala", price: "₹395", veg: false },
+    ],
+  },
+  {
+    id: "mughlai",
+    name: "Mughlai Cuisine",
+    tagline: "Royal Recipes from the Nawabs",
+    description: "Our signature Mughlai dishes represent centuries of culinary excellence from the royal kitchens. Rich gravies, aromatic biryanis, and melt-in-mouth kebabs define this cuisine.",
+    image: dishBiryani,
+    items: [
+      { name: "Lucknowi Lamb Biryani", description: "Slow-cooked lamb with saffron basmati, whole spices, and crispy onions", price: "₹595", veg: false },
+      { name: "Galouti Kebab", description: "Legendary Lucknowi minced lamb kebabs with over 100 spices", price: "₹445", veg: false },
+      { name: "Murgh Korma", description: "Tender chicken in aromatic white gravy with nuts and saffron", price: "₹475", veg: false },
+      { name: "Nihari", description: "Slow-cooked lamb shank stew, the royal breakfast of Nawabs", price: "₹625", veg: false },
+      { name: "Shahi Paneer", description: "Royal cottage cheese curry with cream, nuts, and rose water", price: "₹375", veg: true },
+      { name: "Hyderabadi Chicken Dum", description: "Aromatic chicken dum biryani with mint and fried onions", price: "₹495", veg: false },
+    ],
+  },
+  {
+    id: "thai",
+    name: "Thai Cuisine",
+    tagline: "Fresh & Aromatic Asian Flavors",
+    description: "Transport your taste buds to Thailand with our chef's special Thai preparations. Fresh herbs, coconut milk, and the perfect balance of sweet, sour, salty, and spicy.",
+    image: cuisineThai,
+    items: [
+      { name: "Thai Green Curry", description: "Creamy coconut curry with Thai basil, bamboo shoots, and vegetables", price: "₹395", veg: true },
+      { name: "Thai Red Curry", description: "Aromatic red curry with coconut cream, bell peppers, and your choice of protein", price: "₹425", veg: false },
+      { name: "Pad Thai Noodles", description: "Stir-fried rice noodles with tamarind sauce, peanuts, and bean sprouts", price: "₹345", veg: true },
+      { name: "Thai Fried Rice", description: "Wok-tossed jasmine rice with vegetables, egg, and Thai seasonings", price: "₹295", veg: true },
+      { name: "Tom Yum Soup", description: "Hot and sour soup with lemongrass, galangal, and mushrooms", price: "₹245", veg: true },
+      { name: "Thai Basil Chicken", description: "Stir-fried minced chicken with holy basil and Thai chillies", price: "₹375", veg: false },
+    ],
+  },
+];
 
 const Menu = () => {
-  const [activeCategory, setActiveCategory] = useState<Category>("starters");
+  const [activeCuisine, setActiveCuisine] = useState(cuisines[0].id);
 
-  const categories: { key: Category; label: string }[] = [
-    { key: "starters", label: "Starters" },
-    { key: "mains", label: "Main Course" },
-    { key: "biryani", label: "Biryani & Rice" },
-    { key: "breads", label: "Breads" },
-    { key: "desserts", label: "Desserts" },
-    { key: "beverages", label: "Beverages" },
-  ];
+  const currentCuisine = cuisines.find(c => c.id === activeCuisine) || cuisines[0];
 
   return (
     <main className="min-h-screen bg-background pt-20">
@@ -86,36 +102,71 @@ const Menu = () => {
             Our <span className="text-gradient-gold">Menu</span>
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Explore our curated selection of authentic Mughlai dishes, each prepared with 
+            Explore our curated selection of multi-cuisine dishes, each prepared with 
             time-honored recipes and the finest ingredients
           </p>
         </div>
       </section>
 
-      {/* Menu Section */}
-      <section className="py-16">
+      {/* Cuisine Tabs */}
+      <section className="sticky top-20 z-10 bg-background/95 backdrop-blur-md py-4 border-b border-border/50">
         <div className="container mx-auto px-4 lg:px-8">
-          {/* Category Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12 sticky top-20 bg-background/95 backdrop-blur-md py-4 z-10">
-            {categories.map((category) => (
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4">
+            {cuisines.map((cuisine) => (
               <button
-                key={category.key}
-                onClick={() => setActiveCategory(category.key)}
+                key={cuisine.id}
+                onClick={() => setActiveCuisine(cuisine.id)}
                 className={`px-4 md:px-6 py-2.5 rounded-full font-medium text-sm md:text-base transition-all duration-300 ${
-                  activeCategory === category.key
+                  activeCuisine === cuisine.id
                     ? "bg-accent text-charcoal shadow-lg"
                     : "bg-muted text-muted-foreground hover:bg-muted/80"
                 }`}
               >
-                {category.label}
+                {cuisine.name.split(" ")[0]}
               </button>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Cuisine Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 lg:px-8">
+          {/* Cuisine Header with Image */}
+          <div className="max-w-6xl mx-auto mb-16">
+            <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="aspect-[16/10] rounded-2xl overflow-hidden shadow-elegant">
+                <img
+                  src={currentCuisine.image}
+                  alt={currentCuisine.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <span className="text-accent font-medium text-sm uppercase tracking-wider">
+                  {currentCuisine.tagline}
+                </span>
+                <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mt-3 mb-4">
+                  {currentCuisine.name}
+                </h2>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  {currentCuisine.description}
+                </p>
+                <div className="flex items-center gap-2 mt-6 text-sm text-muted-foreground">
+                  <Leaf className="w-4 h-4 text-green-500" />
+                  <span>Vegetarian options available</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Menu Items */}
           <div className="max-w-4xl mx-auto">
+            <h3 className="font-display text-2xl font-semibold text-foreground mb-8 text-center">
+              Signature Dishes
+            </h3>
             <div className="grid gap-6">
-              {menuData[activeCategory].map((item, index) => (
+              {currentCuisine.items.map((item, index) => (
                 <div
                   key={item.name}
                   className="group flex items-start gap-4 p-6 bg-card rounded-xl border border-border hover:border-accent/30 transition-all duration-300"
@@ -123,9 +174,9 @@ const Menu = () => {
                 >
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
+                      <h4 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
                         {item.name}
-                      </h3>
+                      </h4>
                       <span
                         className={`w-4 h-4 rounded-sm border-2 flex items-center justify-center text-xs ${
                           item.veg

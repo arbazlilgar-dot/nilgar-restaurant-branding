@@ -7,77 +7,28 @@ import dishBiryani from "@/assets/dish-biryani.jpg";
 import dishKebab from "@/assets/dish-kebab.jpg";
 import dishPaneer from "@/assets/dish-paneer.jpg";
 import restaurantInterior from "@/assets/restaurant-interior.jpg";
+import EventsSection from "@/components/EventsSection";
+import TableReservation from "@/components/TableReservation";
 
 const Index = () => {
   const popularDishes = [
-    {
-      name: "Murgh Makhani",
-      description: "Tender chicken in velvety tomato-cream sauce with aromatic spices",
-      price: "₹495",
-      image: dishButterChicken,
-    },
-    {
-      name: "Lucknowi Biryani",
-      description: "Slow-cooked lamb with saffron-infused basmati rice and royal spices",
-      price: "₹595",
-      image: dishBiryani,
-    },
-    {
-      name: "Seekh Kebab",
-      description: "Char-grilled minced lamb skewers with traditional Awadhi spices",
-      price: "₹395",
-      image: dishKebab,
-    },
-    {
-      name: "Paneer Tikka Masala",
-      description: "Cottage cheese in rich, creamy tomato gravy with bell peppers",
-      price: "₹375",
-      image: dishPaneer,
-    },
+    { name: "Murgh Makhani", description: "Tender chicken in velvety tomato-cream sauce with aromatic spices", price: "₹495", image: dishButterChicken },
+    { name: "Lucknowi Biryani", description: "Slow-cooked lamb with saffron-infused basmati rice and royal spices", price: "₹595", image: dishBiryani },
+    { name: "Seekh Kebab", description: "Char-grilled minced lamb skewers with traditional Awadhi spices", price: "₹395", image: dishKebab },
+    { name: "Paneer Tikka Masala", description: "Cottage cheese in rich, creamy tomato gravy with bell peppers", price: "₹375", image: dishPaneer },
   ];
 
   const features = [
-    {
-      icon: Star,
-      title: "Premium Quality",
-      description: "Only the finest ingredients sourced from trusted suppliers across India",
-    },
-    {
-      icon: Clock,
-      title: "Authentic Recipes",
-      description: "Time-honored Mughlai recipes passed down through generations",
-    },
-    {
-      icon: Users,
-      title: "Family Dining",
-      description: "Warm, welcoming ambiance perfect for family gatherings and celebrations",
-    },
-    {
-      icon: Award,
-      title: "Award Winning",
-      description: "Recognized for culinary excellence by top food critics in Gujarat",
-    },
+    { icon: Star, title: "Premium Quality", description: "Only the finest ingredients sourced from trusted suppliers across India" },
+    { icon: Clock, title: "Authentic Recipes", description: "Time-honored Mughlai recipes passed down through generations" },
+    { icon: Users, title: "Family Dining", description: "Warm, welcoming ambiance perfect for family gatherings and celebrations" },
+    { icon: Award, title: "Award Winning", description: "Recognized for culinary excellence by top food critics in Gujarat" },
   ];
 
   const testimonials = [
-    {
-      name: "Priya Sharma",
-      role: "Food Blogger",
-      content: "The biryani at Nilgar is absolutely divine. Each grain of rice tells a story of tradition and love. A must-visit for anyone who appreciates authentic Mughlai cuisine.",
-      rating: 5,
-    },
-    {
-      name: "Rajesh Patel",
-      role: "Regular Guest",
-      content: "We celebrate every family occasion at Nilgar. The staff knows our preferences, the ambiance is perfect, and the food never disappoints. It's our home away from home.",
-      rating: 5,
-    },
-    {
-      name: "Ananya Mehta",
-      role: "Food Critic",
-      content: "Nilgar strikes the perfect balance between authenticity and innovation. Their butter chicken is the benchmark against which I measure all others.",
-      rating: 5,
-    },
+    { name: "Meera Desai", role: "Ahmedabad", content: "Best biryani in the city! My family visits every weekend. The taste is authentic and portion sizes are generous.", rating: 5 },
+    { name: "Karan Joshi", role: "Gandhinagar", content: "Hosted my daughter's birthday here. Staff was very helpful and food was outstanding. Kids loved it!", rating: 5 },
+    { name: "Sunita Patel", role: "Navrangpura", content: "Perfect ambiance for anniversary dinner. Butter chicken and dal makhani were exceptional. Highly recommend!", rating: 5 },
   ];
 
   return (
@@ -268,114 +219,75 @@ const Index = () => {
         <div className="absolute inset-0 bg-pattern opacity-50" />
         <div className="container relative mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-accent font-medium text-sm uppercase tracking-wider">
-              Why Choose Us
-            </span>
+            <span className="text-accent font-medium text-sm uppercase tracking-wider">Why Choose Us</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mt-4 mb-6">
               The <span className="text-gradient-gold">Nilgar Difference</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
-              What makes dining at Nilgar an unforgettable experience
-            </p>
           </div>
-
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <div
-                key={feature.title}
-                className="text-center p-8 rounded-xl bg-background border border-border hover:border-accent/50 transition-all duration-300 group"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent group-hover:text-charcoal transition-all duration-300">
+            {features.map((feature) => (
+              <div key={feature.title} className="text-center p-8 rounded-xl bg-background border border-border hover:border-accent/50 transition-all duration-300 group">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent transition-all duration-300">
                   <feature.icon className="w-8 h-8 text-accent group-hover:text-charcoal transition-colors" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {feature.description}
-                </p>
+                <h3 className="font-display text-xl font-semibold text-foreground mb-3">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Events Section */}
+      <EventsSection />
 
       {/* Testimonials Section */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-accent font-medium text-sm uppercase tracking-wider">
-              Guest Experiences
-            </span>
+            <span className="text-accent font-medium text-sm uppercase tracking-wider">Guest Experiences</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mt-4 mb-6">
               What Our <span className="text-gradient-gold">Guests Say</span>
             </h2>
           </div>
-
           <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.name}
-                className="bg-card p-8 rounded-xl border border-border hover:border-accent/30 transition-all duration-300"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
+            {testimonials.map((testimonial) => (
+              <div key={testimonial.name} className="bg-card p-8 rounded-xl border border-border hover:border-accent/30 transition-all duration-300">
                 <Quote className="w-10 h-10 text-accent/30 mb-4" />
-                <p className="text-foreground leading-relaxed mb-6">
-                  "{testimonial.content}"
-                </p>
+                <p className="text-foreground leading-relaxed mb-6">"{testimonial.content}"</p>
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-accent text-accent" />
                   ))}
                 </div>
-                <div>
-                  <p className="font-display font-semibold text-foreground">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
+                <p className="font-display font-semibold text-foreground">{testimonial.name}</p>
+                <p className="text-sm text-muted-foreground">{testimonial.role}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Table Reservation Section */}
+      <TableReservation />
 
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-r from-primary to-burgundy-dark relative overflow-hidden">
         <div className="absolute inset-0 bg-pattern opacity-20" />
         <div className="container relative mx-auto px-4 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mb-6">
-            Ready to Experience{" "}
-            <span className="text-accent">Culinary Excellence?</span>
+            Ready to Experience <span className="text-accent">Culinary Excellence?</span>
           </h2>
           <p className="text-foreground/80 text-lg max-w-2xl mx-auto mb-10">
-            Join us for an unforgettable dining experience. Whether it's a family celebration, 
-            a romantic dinner, or a casual meal, we're here to make it special.
+            Join us for an unforgettable dining experience. Whether it's a family celebration, a romantic dinner, or a casual meal, we're here to make it special.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact">
-              <Button variant="gold" size="xl">
-                Book Your Table Now
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </Link>
-            <a href="tel:+919876543210">
-              <Button variant="elegant" size="xl">
-                <Phone className="w-5 h-5 mr-2" />
-                Call Us Directly
-              </Button>
-            </a>
+            <Link to="/contact"><Button variant="gold" size="xl">Book Your Table Now <ArrowRight className="w-5 h-5 ml-2" /></Button></Link>
+            <a href="tel:+919876543210"><Button variant="elegant" size="xl"><Phone className="w-5 h-5 mr-2" />Call Us Directly</Button></a>
           </div>
           <div className="flex flex-wrap justify-center gap-8 mt-12 pt-8 border-t border-foreground/20">
-            <div className="flex items-center gap-2 text-foreground/80">
-              <MapPin className="w-5 h-5 text-accent" />
-              <span>123 Heritage Lane, Navrangpura, Ahmedabad</span>
-            </div>
-            <div className="flex items-center gap-2 text-foreground/80">
-              <Clock className="w-5 h-5 text-accent" />
-              <span>Open Daily: 12PM - 11PM</span>
-            </div>
+            <div className="flex items-center gap-2 text-foreground/80"><MapPin className="w-5 h-5 text-accent" /><span>123 Heritage Lane, Navrangpura, Ahmedabad</span></div>
+            <div className="flex items-center gap-2 text-foreground/80"><Clock className="w-5 h-5 text-accent" /><span>Open Daily: 12PM - 11PM</span></div>
           </div>
         </div>
       </section>
