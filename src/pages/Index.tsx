@@ -1,6 +1,8 @@
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Star, Clock, Users, Award, Quote, MapPin, Phone, ChevronRight } from "lucide-react";
+import { ArrowRight, Star, Clock, Users, Award, Quote, MapPin, Phone, ChevronRight, ChevronLeft, ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 import heroBg from "@/assets/hero-bg.jpg";
 import dishButterChicken from "@/assets/dish-butter-chicken.jpg";
 import dishBiryani from "@/assets/dish-biryani.jpg";
@@ -9,13 +11,17 @@ import dishPaneer from "@/assets/dish-paneer.jpg";
 import restaurantInterior from "@/assets/restaurant-interior.jpg";
 import EventsSection from "@/components/EventsSection";
 import TableReservation from "@/components/TableReservation";
+import SpecialOfferSection from "@/components/SpecialOfferSection";
 
 const Index = () => {
+  const { addItem } = useCart();
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
   const popularDishes = [
-    { name: "Murgh Makhani", description: "Tender chicken in velvety tomato-cream sauce with aromatic spices", price: "₹495", image: dishButterChicken },
-    { name: "Lucknowi Biryani", description: "Slow-cooked lamb with saffron-infused basmati rice and royal spices", price: "₹595", image: dishBiryani },
-    { name: "Seekh Kebab", description: "Char-grilled minced lamb skewers with traditional Awadhi spices", price: "₹395", image: dishKebab },
-    { name: "Paneer Tikka Masala", description: "Cottage cheese in rich, creamy tomato gravy with bell peppers", price: "₹375", image: dishPaneer },
+    { id: "butter-chicken", name: "Murgh Makhani", description: "Tender chicken in velvety tomato-cream sauce with aromatic spices", price: 495, image: dishButterChicken },
+    { id: "lucknowi-biryani", name: "Lucknowi Biryani", description: "Slow-cooked lamb with saffron-infused basmati rice and royal spices", price: 595, image: dishBiryani },
+    { id: "seekh-kebab-home", name: "Seekh Kebab", description: "Char-grilled minced lamb skewers with traditional Awadhi spices", price: 395, image: dishKebab },
+    { id: "paneer-tikka-home", name: "Paneer Tikka Masala", description: "Cottage cheese in rich, creamy tomato gravy with bell peppers", price: 375, image: dishPaneer },
   ];
 
   const features = [
@@ -26,27 +32,43 @@ const Index = () => {
   ];
 
   const testimonials = [
-    { name: "Meera Desai", role: "Ahmedabad", content: "Best biryani in the city! My family visits every weekend. The taste is authentic and portion sizes are generous.", rating: 5 },
-    { name: "Karan Joshi", role: "Gandhinagar", content: "Hosted my daughter's birthday here. Staff was very helpful and food was outstanding. Kids loved it!", rating: 5 },
-    { name: "Sunita Patel", role: "Navrangpura", content: "Perfect ambiance for anniversary dinner. Butter chicken and dal makhani were exceptional. Highly recommend!", rating: 5 },
+    { name: "Meera Desai", role: "Ahmedabad", content: "The best Mughlai food experience in the city. The biryani was absolutely royal. My family loves coming here every weekend.", rating: 5, avatar: "MD" },
+    { name: "Karan Joshi", role: "Gandhinagar", content: "Beautiful ambiance and authentic flavors. Hosted my anniversary here — the staff made it truly special. Highly recommended!", rating: 5, avatar: "KJ" },
+    { name: "Sunita Patel", role: "Navrangpura", content: "Amazing service and incredible taste. The butter chicken is the best I've had. Perfect place for family dinners.", rating: 5, avatar: "SP" },
+    { name: "Rajesh Sharma", role: "SG Highway", content: "The kebabs here are extraordinary. Authentic Lucknowi flavors that transport you. Great value for money too.", rating: 5, avatar: "RS" },
+    { name: "Priya Mehta", role: "Satellite", content: "We hosted our daughter's birthday party here. The food, decor, and service were all top-notch. Truly a premium experience.", rating: 5, avatar: "PM" },
   ];
+
+  const nextTestimonial = useCallback(() => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  }, [testimonials.length]);
+
+  const prevTestimonial = useCallback(() => {
+    setCurrentTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  }, [testimonials.length]);
+
+  useEffect(() => {
+    const timer = setInterval(nextTestimonial, 5000);
+    return () => clearInterval(timer);
+  }, [nextTestimonial]);
+
+  const getVisibleTestimonials = () => {
+    const indices = [];
+    for (let i = 0; i < 3; i++) {
+      indices.push((currentTestimonial + i) % testimonials.length);
+    }
+    return indices;
+  };
 
   return (
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src={heroBg}
-            alt="Nilgar Restaurant signature dishes"
-            className="w-full h-full object-cover"
-          />
+          <img src={heroBg} alt="Nilgar Restaurant signature dishes" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
-
-        {/* Content */}
         <div className="container relative mx-auto px-4 lg:px-8 pt-24">
           <div className="max-w-3xl">
             <div className="animate-fade-up">
@@ -54,53 +76,25 @@ const Index = () => {
                 Welcome to Nilgar Restaurant
               </span>
             </div>
-
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 animate-fade-up delay-100">
-              <span className="text-foreground">Where Royal</span>
-              <br />
-              <span className="text-gradient-gold">Mughlai Flavors</span>
-              <br />
+              <span className="text-foreground">Where Royal</span><br />
+              <span className="text-gradient-gold">Mughlai Flavors</span><br />
               <span className="text-foreground">Come Alive</span>
             </h1>
-
             <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-8 animate-fade-up delay-200">
-              Experience the grandeur of authentic Mughlai cuisine in an elegant setting. 
-              Every dish tells a story of tradition, crafted with love and served with pride.
+              Experience the grandeur of authentic Mughlai cuisine in an elegant setting. Every dish tells a story of tradition, crafted with love and served with pride.
             </p>
-
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-up delay-300">
-              <Link to="/menu">
-                <Button variant="gold" size="xl" className="w-full sm:w-auto">
-                  Explore Our Menu
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button variant="elegant" size="xl" className="w-full sm:w-auto">
-                  Reserve a Table
-                </Button>
-              </Link>
+              <Link to="/menu"><Button variant="gold" size="xl" className="w-full sm:w-auto">Explore Our Menu<ArrowRight className="w-5 h-5 ml-2" /></Button></Link>
+              <Link to="/contact"><Button variant="elegant" size="xl" className="w-full sm:w-auto">Reserve a Table</Button></Link>
             </div>
-
-            {/* Quick Stats */}
             <div className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-border/30 animate-fade-up delay-400">
-              <div>
-                <p className="text-3xl font-display font-bold text-accent">15+</p>
-                <p className="text-sm text-muted-foreground">Years of Excellence</p>
-              </div>
-              <div>
-                <p className="text-3xl font-display font-bold text-accent">50+</p>
-                <p className="text-sm text-muted-foreground">Signature Dishes</p>
-              </div>
-              <div>
-                <p className="text-3xl font-display font-bold text-accent">10K+</p>
-                <p className="text-sm text-muted-foreground">Happy Guests</p>
-              </div>
+              <div><p className="text-3xl font-display font-bold text-accent">15+</p><p className="text-sm text-muted-foreground">Years of Excellence</p></div>
+              <div><p className="text-3xl font-display font-bold text-accent">50+</p><p className="text-sm text-muted-foreground">Signature Dishes</p></div>
+              <div><p className="text-3xl font-display font-bold text-accent">10K+</p><p className="text-sm text-muted-foreground">Happy Guests</p></div>
             </div>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
           <div className="w-6 h-10 border-2 border-accent/50 rounded-full flex items-start justify-center p-2">
             <div className="w-1.5 h-3 bg-accent rounded-full animate-[bounce_2s_infinite]" />
@@ -108,113 +102,83 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About Preview Section */}
+      {/* About Preview */}
       <section className="py-24 bg-card relative overflow-hidden">
         <div className="absolute inset-0 bg-pattern opacity-50" />
         <div className="container relative mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Image */}
             <div className="relative">
               <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-elegant">
-                <img
-                  src={restaurantInterior}
-                  alt="Nilgar Restaurant elegant interior"
-                  className="w-full h-full object-cover"
-                />
+                <img src={restaurantInterior} alt="Nilgar Restaurant elegant interior" className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-6 -right-6 bg-accent text-charcoal p-6 rounded-lg shadow-lg hidden md:block">
                 <p className="text-4xl font-display font-bold">15+</p>
                 <p className="text-sm font-medium">Years of Legacy</p>
               </div>
             </div>
-
-            {/* Content */}
             <div>
-              <span className="text-accent font-medium text-sm uppercase tracking-wider">
-                Our Story
-              </span>
+              <span className="text-accent font-medium text-sm uppercase tracking-wider">Our Story</span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mt-4 mb-6">
-                A Legacy of{" "}
-                <span className="text-gradient-gold">Culinary Excellence</span>
+                A Legacy of <span className="text-gradient-gold">Culinary Excellence</span>
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                Nilgar Restaurant was born from a passion to bring the authentic flavors of 
-                Mughlai cuisine to Ahmedabad. Our recipes have been refined over generations, 
-                each dish a testament to the royal culinary traditions of Lucknow and Hyderabad.
+                Nilgar Restaurant was born from a passion to bring the authentic flavors of Mughlai cuisine to Ahmedabad. Our recipes have been refined over generations, each dish a testament to the royal culinary traditions of Lucknow and Hyderabad.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                From the aromatic biryanis to the melt-in-your-mouth kebabs, every creation 
-                at Nilgar is crafted with premium ingredients and unwavering attention to detail. 
-                We invite you to experience the warmth of Indian hospitality and the grandeur 
-                of Mughlai flavors.
+                From the aromatic biryanis to the melt-in-your-mouth kebabs, every creation at Nilgar is crafted with premium ingredients and unwavering attention to detail.
               </p>
-              <Link to="/about">
-                <Button variant="elegant" size="lg">
-                  Discover Our Journey
-                  <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
-              </Link>
+              <Link to="/about"><Button variant="elegant" size="lg">Discover Our Journey<ChevronRight className="w-4 h-4 ml-1" /></Button></Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Popular Dishes Section */}
+      {/* Popular Dishes */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-accent font-medium text-sm uppercase tracking-wider">
-              Signature Creations
-            </span>
+            <span className="text-accent font-medium text-sm uppercase tracking-wider">Signature Creations</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mt-4 mb-6">
               Our Most <span className="text-gradient-gold">Loved Dishes</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Discover the flavors that have made us a beloved destination for food connoisseurs
-            </p>
+            <p className="text-muted-foreground text-lg">Discover the flavors that have made us a beloved destination for food connoisseurs</p>
           </div>
-
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {popularDishes.map((dish, index) => (
-              <div
-                key={dish.name}
-                className="group bg-card rounded-xl overflow-hidden border border-border hover:border-accent/50 transition-all duration-500 hover:shadow-elegant"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src={dish.image}
-                    alt={dish.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
+              <div key={dish.name} className="group bg-card rounded-xl overflow-hidden border border-border hover:border-accent/50 transition-all duration-500 hover:shadow-elegant" style={{ animationDelay: `${index * 100}ms` }}>
+                <div className="aspect-square overflow-hidden relative">
+                  <img src={dish.image} alt={dish.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
-                      {dish.name}
-                    </h3>
-                    <span className="text-accent font-bold">{dish.price}</span>
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-accent text-accent" />)}
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {dish.description}
-                  </p>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors">{dish.name}</h3>
+                    <span className="text-accent font-bold">₹{dish.price}</span>
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">{dish.description}</p>
+                  <Button
+                    variant="gold"
+                    size="sm"
+                    className="w-full text-xs"
+                    onClick={() => addItem({ id: dish.id, name: dish.name, price: dish.price, image: dish.image })}
+                  >
+                    <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
+                    Add to Order
+                  </Button>
                 </div>
               </div>
             ))}
           </div>
-
           <div className="text-center mt-12">
-            <Link to="/menu">
-              <Button variant="gold" size="lg">
-                View Full Menu
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </Link>
+            <Link to="/menu"><Button variant="gold" size="lg">View Full Menu<ArrowRight className="w-5 h-5 ml-2" /></Button></Link>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
+      {/* Why Choose Us */}
       <section className="py-24 bg-card relative overflow-hidden">
         <div className="absolute inset-0 bg-pattern opacity-50" />
         <div className="container relative mx-auto px-4 lg:px-8">
@@ -238,11 +202,14 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Special Offer */}
+      <SpecialOfferSection />
+
       {/* Events Section */}
       <EventsSection />
 
-      {/* Testimonials Section */}
-      <section className="py-24 bg-background">
+      {/* Testimonials Slider */}
+      <section className="py-24 bg-background overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-accent font-medium text-sm uppercase tracking-wider">Guest Experiences</span>
@@ -250,25 +217,54 @@ const Index = () => {
               What Our <span className="text-gradient-gold">Guests Say</span>
             </h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial) => (
-              <div key={testimonial.name} className="bg-card p-8 rounded-xl border border-border hover:border-accent/30 transition-all duration-300">
-                <Quote className="w-10 h-10 text-accent/30 mb-4" />
-                <p className="text-foreground leading-relaxed mb-6">"{testimonial.content}"</p>
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                  ))}
-                </div>
-                <p className="font-display font-semibold text-foreground">{testimonial.name}</p>
-                <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+
+          {/* Slider */}
+          <div className="relative max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-6">
+              {getVisibleTestimonials().map((idx) => {
+                const testimonial = testimonials[idx];
+                return (
+                  <div key={`${testimonial.name}-${idx}`} className="bg-card p-8 rounded-xl border border-border hover:border-accent/30 transition-all duration-500">
+                    <Quote className="w-10 h-10 text-accent/30 mb-4" />
+                    <p className="text-foreground leading-relaxed mb-6 min-h-[80px]">"{testimonial.content}"</p>
+                    <div className="flex items-center gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                      ))}
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent font-display font-bold text-sm">
+                        {testimonial.avatar}
+                      </div>
+                      <div>
+                        <p className="font-display font-semibold text-foreground">{testimonial.name}</p>
+                        <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Navigation */}
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <button onClick={prevTestimonial} className="p-2.5 rounded-full bg-muted hover:bg-accent hover:text-charcoal transition-all duration-300">
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <div className="flex gap-2">
+                {testimonials.map((_, i) => (
+                  <button key={i} onClick={() => setCurrentTestimonial(i)} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentTestimonial ? "bg-accent w-8" : "bg-muted-foreground/30 hover:bg-muted-foreground/50"}`} />
+                ))}
               </div>
-            ))}
+              <button onClick={nextTestimonial} className="p-2.5 rounded-full bg-muted hover:bg-accent hover:text-charcoal transition-all duration-300">
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Table Reservation Section */}
+      {/* Table Reservation */}
       <TableReservation />
 
       {/* CTA Section */}
@@ -282,7 +278,7 @@ const Index = () => {
             Join us for an unforgettable dining experience. Whether it's a family celebration, a romantic dinner, or a casual meal, we're here to make it special.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact"><Button variant="gold" size="xl">Book Your Table Now <ArrowRight className="w-5 h-5 ml-2" /></Button></Link>
+            <Link to="/contact"><Button variant="gold" size="xl">Book Your Table Now<ArrowRight className="w-5 h-5 ml-2" /></Button></Link>
             <a href="tel:+919876543210"><Button variant="elegant" size="xl"><Phone className="w-5 h-5 mr-2" />Call Us Directly</Button></a>
           </div>
           <div className="flex flex-wrap justify-center gap-8 mt-12 pt-8 border-t border-foreground/20">
