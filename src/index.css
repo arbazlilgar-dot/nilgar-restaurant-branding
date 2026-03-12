@@ -135,6 +135,13 @@
     animation: float 6s ease-in-out infinite;
   }
 
+  .glow-hover {
+    transition: box-shadow 0.3s ease;
+  }
+  .glow-hover:hover {
+    box-shadow: 0 0 20px hsla(38, 80%, 55%, 0.3), 0 0 40px hsla(38, 80%, 55%, 0.1);
+  }
+
   @keyframes fadeUp {
     from {
       opacity: 0;
