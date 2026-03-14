@@ -2,6 +2,7 @@ import { Star, ShoppingCart, Eye, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { MenuDish } from "@/data/menuData";
+import { toast } from "@/hooks/use-toast";
 
 interface MenuDishCardProps {
   dish: MenuDish;
