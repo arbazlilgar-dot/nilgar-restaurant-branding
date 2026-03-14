@@ -1,6 +1,7 @@
 import { X, Star, ShoppingCart, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
+import { toast } from "@/hooks/use-toast";
 
 interface DishDetailModalProps {
   dish: {
