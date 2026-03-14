@@ -175,7 +175,7 @@ const Index = () => {
                     variant="gold"
                     size="sm"
                     className="w-full text-xs"
-                    onClick={() => addItem({ id: dish.id, name: dish.name, price: dish.price, image: dish.image })}
+                    onClick={() => handleAddToOrder(dish)}
                   >
                     <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
                     Add to Order
