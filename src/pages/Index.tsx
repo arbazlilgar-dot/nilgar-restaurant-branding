@@ -191,7 +191,7 @@ const Index = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-24 bg-card relative overflow-hidden">
+      <section ref={featuresReveal.ref} className={`py-24 bg-card relative overflow-hidden transition-all duration-700 ${featuresReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="absolute inset-0 bg-pattern opacity-50" />
         <div className="container relative mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
