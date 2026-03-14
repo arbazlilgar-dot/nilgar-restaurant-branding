@@ -146,7 +146,7 @@ const Index = () => {
       </section>
 
       {/* Popular Dishes */}
-      <section className="py-24 bg-background">
+      <section ref={dishesReveal.ref} className={`py-24 bg-background transition-all duration-700 ${dishesReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-accent font-medium text-sm uppercase tracking-wider">Signature Creations</span>
