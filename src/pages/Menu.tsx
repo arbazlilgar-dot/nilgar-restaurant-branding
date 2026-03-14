@@ -83,8 +83,10 @@ const Menu = () => {
           </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
-            {currentCategory.dishes.map((dish) => (
-              <MenuDishCard key={dish.id} dish={dish} onViewDetails={setSelectedDish} />
+            {currentCategory.dishes.map((dish, index) => (
+              <ScrollRevealCard key={dish.id} index={index}>
+                <MenuDishCard dish={dish} onViewDetails={setSelectedDish} />
+              </ScrollRevealCard>
             ))}
           </div>
 
