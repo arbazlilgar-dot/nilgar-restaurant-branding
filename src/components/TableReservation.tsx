@@ -189,6 +189,24 @@ const TableReservation = ({ variant = "section" }: TableReservationProps) => {
           </form>
         </div>
       </div>
+      {/* Confirmation Modal */}
+      {showConfirmation && (
+        <>
+          <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50" onClick={() => setShowConfirmation(false)} />
+          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-card rounded-2xl border border-border p-8 md:p-10 shadow-elegant animate-scale-in max-w-md w-[90%] text-center">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center">
+              <Check className="w-8 h-8 text-accent" />
+            </div>
+            <h3 className="font-display text-2xl font-bold text-foreground mb-3">Reservation Received!</h3>
+            <p className="text-muted-foreground mb-6">
+              Your reservation request has been received. Our team will contact you shortly to confirm your booking.
+            </p>
+            <Button variant="gold" onClick={() => setShowConfirmation(false)}>
+              Done
+            </Button>
+          </div>
+        </>
+      )}
     </section>
   );
 };
