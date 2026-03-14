@@ -62,6 +62,16 @@ const Index = () => {
     return indices;
   };
 
+  const aboutReveal = useScrollReveal();
+  const dishesReveal = useScrollReveal();
+  const featuresReveal = useScrollReveal();
+  const testimonialsReveal = useScrollReveal();
+
+  const handleAddToOrder = (dish: typeof popularDishes[0]) => {
+    addItem({ id: dish.id, name: dish.name, price: dish.price, image: dish.image });
+    toast({ title: "Item added to your order", description: `${dish.name} — ₹${dish.price}` });
+  };
+
   return (
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
