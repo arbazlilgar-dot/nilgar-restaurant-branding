@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X, ChevronLeft, ChevronRight, Camera, Utensils, PartyPopper, Home } from "lucide-react";
 import galleryDining from "@/assets/gallery-dining.jpg";
 import galleryKitchen from "@/assets/gallery-kitchen.jpg";
