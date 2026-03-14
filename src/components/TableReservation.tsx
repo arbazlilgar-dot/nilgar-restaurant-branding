@@ -19,12 +19,11 @@ const TableReservation = ({ variant = "section" }: TableReservationProps) => {
 
   const guestOptions = ["2", "3", "4", "5", "6", "7", "8+"];
 
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Reservation Confirmed!",
-      description: `Table for ${formData.guests} on ${formData.date} at ${formData.time}. We'll send a confirmation shortly.`,
-    });
+    setShowConfirmation(true);
     setFormData({ name: "", phone: "", date: "", time: "", guests: "2" });
   };
 
