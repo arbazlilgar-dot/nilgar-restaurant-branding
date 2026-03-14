@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star, Clock, Users, Award, Quote, MapPin, Phone, ChevronRight, ChevronLeft, ShoppingCart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { toast } from "@/hooks/use-toast";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import heroBg from "@/assets/hero-bg.jpg";
 import dishButterChicken from "@/assets/dish-butter-chicken.jpg";
 import dishBiryani from "@/assets/dish-biryani.jpg";
@@ -60,6 +62,16 @@ const Index = () => {
     return indices;
   };
 
+  const aboutReveal = useScrollReveal();
+  const dishesReveal = useScrollReveal();
+  const featuresReveal = useScrollReveal();
+  const testimonialsReveal = useScrollReveal();
+
+  const handleAddToOrder = (dish: typeof popularDishes[0]) => {
+    addItem({ id: dish.id, name: dish.name, price: dish.price, image: dish.image });
+    toast({ title: "Item added to your order", description: `${dish.name} — ₹${dish.price}` });
+  };
+
   return (
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -103,7 +115,7 @@ const Index = () => {
       </section>
 
       {/* About Preview */}
-      <section className="py-24 bg-card relative overflow-hidden">
+      <section ref={aboutReveal.ref} className={`py-24 bg-card relative overflow-hidden transition-all duration-700 ${aboutReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="absolute inset-0 bg-pattern opacity-50" />
         <div className="container relative mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -134,7 +146,7 @@ const Index = () => {
       </section>
 
       {/* Popular Dishes */}
-      <section className="py-24 bg-background">
+      <section ref={dishesReveal.ref} className={`py-24 bg-background transition-all duration-700 ${dishesReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-accent font-medium text-sm uppercase tracking-wider">Signature Creations</span>
@@ -163,7 +175,7 @@ const Index = () => {
                     variant="gold"
                     size="sm"
                     className="w-full text-xs"
-                    onClick={() => addItem({ id: dish.id, name: dish.name, price: dish.price, image: dish.image })}
+                    onClick={() => handleAddToOrder(dish)}
                   >
                     <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
                     Add to Order
@@ -179,7 +191,7 @@ const Index = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-24 bg-card relative overflow-hidden">
+      <section ref={featuresReveal.ref} className={`py-24 bg-card relative overflow-hidden transition-all duration-700 ${featuresReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="absolute inset-0 bg-pattern opacity-50" />
         <div className="container relative mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -209,7 +221,7 @@ const Index = () => {
       <EventsSection />
 
       {/* Testimonials Slider */}
-      <section className="py-24 bg-background overflow-hidden">
+      <section ref={testimonialsReveal.ref} className={`py-24 bg-background overflow-hidden transition-all duration-700 ${testimonialsReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-accent font-medium text-sm uppercase tracking-wider">Guest Experiences</span>

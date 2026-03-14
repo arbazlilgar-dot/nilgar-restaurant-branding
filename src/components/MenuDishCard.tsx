@@ -2,6 +2,7 @@ import { Star, ShoppingCart, Eye, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { MenuDish } from "@/data/menuData";
+import { toast } from "@/hooks/use-toast";
 
 interface MenuDishCardProps {
   dish: MenuDish;
@@ -14,6 +15,7 @@ const MenuDishCard = ({ dish, onViewDetails }: MenuDishCardProps) => {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     addItem({ id: dish.id, name: dish.name, price: dish.price, image: dish.image });
+    toast({ title: "Item added to your order", description: `${dish.name} — ₹${dish.price}` });
   };
 
   return (

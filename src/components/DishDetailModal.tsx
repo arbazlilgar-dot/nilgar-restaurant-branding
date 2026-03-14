@@ -1,6 +1,7 @@
 import { X, Star, ShoppingCart, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
+import { toast } from "@/hooks/use-toast";
 
 interface DishDetailModalProps {
   dish: {
@@ -24,6 +25,7 @@ const DishDetailModal = ({ dish, onClose }: DishDetailModalProps) => {
 
   const handleAddToCart = () => {
     addItem({ id: dish.id, name: dish.name, price: dish.price, image: dish.image });
+    toast({ title: "Item added to your order", description: `${dish.name} — ₹${dish.price}` });
     onClose();
   };
 
