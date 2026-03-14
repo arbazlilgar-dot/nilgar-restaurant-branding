@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star, Clock, Users, Award, Quote, MapPin, Phone, ChevronRight, ChevronLeft, ShoppingCart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { toast } from "@/hooks/use-toast";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import heroBg from "@/assets/hero-bg.jpg";
 import dishButterChicken from "@/assets/dish-butter-chicken.jpg";
 import dishBiryani from "@/assets/dish-biryani.jpg";
