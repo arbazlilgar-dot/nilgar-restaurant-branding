@@ -1,10 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChefHat, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { menuCategories, MenuDish } from "@/data/menuData";
 import MenuDishCard from "@/components/MenuDishCard";
 import DishDetailModal from "@/components/DishDetailModal";
+
+const ScrollRevealCard = ({ children, index }: { children: React.ReactNode; index: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.unobserve(el); } },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      style={{ transitionDelay: `${index * 80}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState(menuCategories[0].id);
