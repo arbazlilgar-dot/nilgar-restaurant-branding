@@ -1,4 +1,4 @@
-import { Star, ShoppingCart, Eye, Leaf } from "lucide-react";
+import { Star, ShoppingCart, Eye, Leaf, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { MenuDish } from "@/data/menuData";
@@ -10,12 +10,15 @@ interface MenuDishCardProps {
 }
 
 const MenuDishCard = ({ dish, onViewDetails }: MenuDishCardProps) => {
-  const { addItem } = useCart();
+  const { addItem, items } = useCart();
+
+  const cartItem = items.find((item) => item.id === dish.id);
+  const isInCart = !!cartItem;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     addItem({ id: dish.id, name: dish.name, price: dish.price, image: dish.image });
-    toast({ title: "Item added to your order", description: `${dish.name} — ₹${dish.price}` });
+    toast({ title: "✅ Item added to your order!", description: `${dish.name} — ₹${dish.price}` });
   };
 
   return (
@@ -34,6 +37,13 @@ const MenuDishCard = ({ dish, onViewDetails }: MenuDishCardProps) => {
         {dish.veg && (
           <div className="absolute top-3 left-3 flex items-center gap-1 px-2.5 py-1 bg-green-600/90 backdrop-blur-sm rounded-full text-xs text-white font-medium">
             <Leaf className="w-3 h-3" /> Veg
+          </div>
+        )}
+
+        {/* "In Cart" badge */}
+        {isInCart && (
+          <div className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 bg-accent/90 backdrop-blur-sm rounded-full text-xs text-charcoal font-bold">
+            <Check className="w-3 h-3" /> {cartItem.quantity} Added
           </div>
         )}
 
@@ -64,9 +74,14 @@ const MenuDishCard = ({ dish, onViewDetails }: MenuDishCardProps) => {
 
         <div className="flex items-center justify-between">
           <span className="text-xl font-display font-bold text-accent">₹{dish.price}</span>
-          <Button variant="gold" size="sm" onClick={handleAddToCart} className="text-xs">
+          <Button
+            variant={isInCart ? "outline" : "gold"}
+            size="sm"
+            onClick={handleAddToCart}
+            className={`text-xs ${isInCart ? "border-accent text-accent hover:bg-accent hover:text-charcoal" : ""}`}
+          >
             <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
-            Add to Order
+            {isInCart ? `Added (${cartItem.quantity})` : "Add to Order"}
           </Button>
         </div>
       </div>

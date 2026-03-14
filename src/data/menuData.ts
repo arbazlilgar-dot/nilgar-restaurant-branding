@@ -1,51 +1,3 @@
-// ── Local asset imports ───────────────────────────────────────────────
-// Starters
-import imgSeekh from "@/assets/menu-seekh-kebab.jpg";
-import imgShami from "@/assets/menu-shami-kebab.jpg";
-import imgPaneerTikka from "@/assets/menu-paneer-tikka.jpg";
-import imgAfghani from "@/assets/menu-afghani-chicken.jpg";
-import imgVegTandooriPlatter from "@/assets/menu-veg-tandoori-platter.png";
-import imgAlooTikki from "@/assets/menu-aloo-tikki.png";
-
-// Biryani
-import imgHyderabadi from "@/assets/menu-hyderabadi-biryani.jpg";
-import imgLucknowi from "@/assets/menu-lucknowi-biryani.jpg";
-import imgRoyalDum from "@/assets/menu-royal-biryani.jpg";
-import imgVegBiryani from "@/assets/menu-veg-biryani.jpg";
-
-// Curries
-import imgButterChicken from "@/assets/menu-butter-chicken-gen.png";
-import imgRoganJosh from "@/assets/menu-rogan-josh.jpg";
-import imgPaneerButterMasala from "@/assets/menu-paneer-butter-masala.png";
-import imgChickenKorma from "@/assets/menu-chicken-korma.jpg";
-import imgDalMakhani from "@/assets/menu-dal-makhani.png";
-import imgShahiPaneer from "@/assets/menu-shahi-paneer-gen.png";
-import imgPalakPaneer from "@/assets/menu-palak-paneer.png";
-import imgMalaiKofta from "@/assets/menu-malai-kofta-gen.png";
-import imgDalTadka from "@/assets/menu-dal-tadka.png";
-
-// Tandoori
-import imgTandooriChicken from "@/assets/menu-tandoori-chicken.png";
-import imgMalaiTikka from "@/assets/menu-malai-tikka.jpg";
-import imgTandooriPrawns from "@/assets/menu-tandoori-prawns.jpg";
-import imgButterNaan from "@/assets/menu-butter-naan.png";
-import imgGarlicNaan from "@/assets/menu-garlic-naan.png";
-
-// Rice
-import imgJeeraRice from "@/assets/menu-jeera-rice.png";
-import imgVegPulao from "@/assets/menu-veg-pulao.png";
-
-// Desserts
-import imgShahiTukda from "@/assets/menu-shahi-tukda.jpg";
-import imgGulabJamun from "@/assets/menu-gulab-jamun.jpg";
-import imgKesarKulfi from "@/assets/menu-kesar-kulfi.jpg";
-
-// Beverages
-import imgMasalaChaas from "@/assets/menu-masala-chaas.png";
-import imgSweetLassi from "@/assets/menu-sweet-lassi.png";
-import imgSaltedLassi from "@/assets/menu-salted-lassi.png";
-
-// ── Types ─────────────────────────────────────────────────────────────
 export interface MenuDish {
   id: string;
   name: string;
@@ -64,7 +16,6 @@ export interface MenuCategory {
   dishes: MenuDish[];
 }
 
-// ── Menu Data ─────────────────────────────────────────────────────────
 export const menuCategories: MenuCategory[] = [
   {
     id: "starters",
@@ -76,7 +27,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Char-grilled minced chicken skewers with Awadhi spices",
         longDescription: "Our signature seekh kebabs are crafted from finely minced chicken, blended with fresh herbs, ginger, and a secret mix of over 20 Awadhi spices. Hand-rolled and slow-grilled over charcoal for perfect smoky char.",
         price: 395,
-        image: imgSeekh,
+        image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&auto=format&fit=crop",
         rating: 5,
         veg: false,
         category: "Royal Starters",
@@ -87,7 +38,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Melt-in-mouth minced mutton patties with aromatic spices",
         longDescription: "A Lucknowi delicacy - tender mutton slow-cooked with chana dal and whole spices, shaped into silky patties and shallow-fried to golden perfection.",
         price: 445,
-        image: imgShami,
+        image: "https://images.unsplash.com/photo-1561651823-34feb02250e4?w=600&auto=format&fit=crop",
         rating: 5,
         veg: false,
         category: "Royal Starters",
@@ -98,7 +49,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Cottage cheese cubes marinated in tandoori spices, chargrilled",
         longDescription: "Premium cottage cheese marinated overnight in hung curd, Kashmiri chilli, and aromatic spices. Skewered with bell peppers and onions, chargrilled in a clay tandoor.",
         price: 345,
-        image: imgPaneerTikka,
+        image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Royal Starters",
@@ -109,7 +60,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Creamy cashew-marinated chicken grilled to perfection",
         longDescription: "Succulent chicken pieces bathed in a rich marinade of cream, cashew paste, white pepper, and cheese, grilled in our tandoor until golden.",
         price: 425,
-        image: imgAfghani,
+        image: "https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=600&auto=format&fit=crop",
         rating: 5,
         veg: false,
         category: "Royal Starters",
@@ -120,7 +71,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Assorted grilled vegetables and paneer with mint chutney",
         longDescription: "A colourful platter of tandoor-grilled seasonal vegetables including mushrooms, baby corn, broccoli, zucchini, and paneer, all marinated in a fragrant herb blend.",
         price: 365,
-        image: imgVegTandooriPlatter,
+        image: "https://images.unsplash.com/V58povvEj_w?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Royal Starters",
@@ -131,7 +82,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Crispy potato patties with tangy chutneys and yogurt",
         longDescription: "Golden crispy potato patties topped with whipped yogurt, date-tamarind chutney, green chutney, and chaat masala. A beloved street-food classic.",
         price: 245,
-        image: imgAlooTikki,
+        image: "https://images.unsplash.com/YFLAVF_9nzo?w=600&auto=format&fit=crop",
         rating: 5,
         veg: true,
         category: "Royal Starters",
@@ -148,7 +99,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Aromatic dum-cooked biryani with saffron and crispy onions",
         longDescription: "Authentic dum pukht technique - marinated chicken and fragrant basmati rice layered with saffron milk, fried onions, and fresh mint, sealed and slow-cooked.",
         price: 495,
-        image: imgHyderabadi,
+        image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&auto=format&fit=crop",
         rating: 5,
         veg: false,
         category: "Signature Biryani",
@@ -159,7 +110,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Tender mutton with saffron-infused rice and whole spices",
         longDescription: "The pride of Awadhi cuisine - succulent mutton slow-cooked with aged basmati rice, whole garam masala, and potli masala. Infused with saffron and kewra water.",
         price: 595,
-        image: imgLucknowi,
+        image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&auto=format&fit=crop",
         rating: 5,
         veg: false,
         category: "Signature Biryani",
@@ -170,7 +121,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Chef special biryani with premium spices and dry fruits",
         longDescription: "A regal biryani featuring the finest cuts of meat, premium aged basmati, and a lavish garnish of cashews, raisins, and edible silver leaf.",
         price: 695,
-        image: imgRoyalDum,
+        image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=600&auto=format&fit=crop",
         rating: 5,
         veg: false,
         category: "Signature Biryani",
@@ -181,7 +132,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Garden vegetables with fragrant rice, nuts, and saffron",
         longDescription: "A vegetarian masterpiece - seasonal vegetables, paneer, and aromatic basmati rice layered with saffron, rose water, and Mughlai spices. Garnished with fried cashews.",
         price: 395,
-        image: imgVegBiryani,
+        image: "https://images.unsplash.com/Cgw62rXaPpM?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Signature Biryani",
@@ -198,7 +149,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Iconic creamy tomato gravy with tender tandoori chicken",
         longDescription: "Our most beloved dish - tandoor-smoked chicken simmered in a velvety sauce of fresh tomatoes, cream, butter, and fenugreek. Perfected over 15 years.",
         price: 495,
-        image: imgButterChicken,
+        image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&auto=format&fit=crop",
         rating: 5,
         veg: false,
         category: "Mughlai Curries",
@@ -209,7 +160,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Kashmiri-style lamb curry with aromatic whole spices",
         longDescription: "Tender lamb braised in a rich gravy of Kashmiri chillies, fennel, and dried ginger. Slow-cooked until the meat falls off the bone.",
         price: 595,
-        image: imgRoganJosh,
+        image: "https://images.unsplash.com/photo-1545247181-516773cae754?w=600&auto=format&fit=crop",
         rating: 5,
         veg: false,
         category: "Mughlai Curries",
@@ -220,7 +171,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Cottage cheese in rich, buttery tomato cream sauce",
         longDescription: "Premium cottage cheese in our signature buttery tomato gravy enriched with cashew paste and fresh cream. A vegetarian delight finished with kasuri methi.",
         price: 395,
-        image: imgPaneerButterMasala,
+        image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&auto=format&fit=crop",
         rating: 5,
         veg: true,
         category: "Mughlai Curries",
@@ -231,7 +182,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Royal white gravy with nuts, saffron, and tender chicken",
         longDescription: "Tender chicken simmered in a luxurious sauce of yogurt, cashews, almonds, and aromatic spices. Finished with saffron strands and rose water.",
         price: 475,
-        image: imgChickenKorma,
+        image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&auto=format&fit=crop",
         rating: 4,
         veg: false,
         category: "Mughlai Curries",
@@ -242,7 +193,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Slow-cooked black lentils in buttery tomato cream sauce",
         longDescription: "Black urad dal and rajma slow-cooked overnight with tomatoes, cream, and butter. Rich, silky, and deeply comforting.",
         price: 325,
-        image: imgDalMakhani,
+        image: "https://images.unsplash.com/TvFX2pEPA9Y?w=600&auto=format&fit=crop",
         rating: 5,
         veg: true,
         category: "Mughlai Curries",
@@ -253,7 +204,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Royal cottage cheese in rich cashew-cream gravy",
         longDescription: "Soft paneer cooked in a lavish Mughlai gravy of cashew paste, cream, onion, and whole spices. Mildly spiced with a hint of rose water.",
         price: 375,
-        image: imgShahiPaneer,
+        image: "https://images.unsplash.com/7jERG_ACcQs?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Mughlai Curries",
@@ -264,7 +215,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Cottage cheese cubes in a vibrant spinach gravy",
         longDescription: "Fresh spinach purée with soft paneer cubes, tempered with garlic, cumin, and a touch of cream. A wholesome and nutritious Mughlai classic.",
         price: 355,
-        image: imgPalakPaneer,
+        image: "https://images.unsplash.com/_bAW_ln_-Zs?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Mughlai Curries",
@@ -275,7 +226,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Deep-fried paneer-potato dumplings in creamy tomato gravy",
         longDescription: "Soft dumplings made from paneer and potatoes, stuffed with dry fruits, served in a rich cashew-tomato gravy with a hint of sweetness.",
         price: 385,
-        image: imgMalaiKofta,
+        image: "https://images.unsplash.com/fK_HVGbF84A?w=600&auto=format&fit=crop",
         rating: 5,
         veg: true,
         category: "Mughlai Curries",
@@ -286,7 +237,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Yellow lentils tempered with cumin, garlic and ghee",
         longDescription: "Comfort food at its finest – toor dal slow-cooked to silky smoothness and topped with a sizzling tadka of cumin, garlic, dried chillies, and pure ghee.",
         price: 275,
-        image: imgDalTadka,
+        image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Mughlai Curries",
@@ -303,7 +254,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Classic half chicken marinated and roasted in clay tandoor",
         longDescription: "A half chicken marinated for 24 hours in yogurt, Kashmiri chilli, and a robust spice blend, then roasted in our fiery clay tandoor at 400 degrees.",
         price: 445,
-        image: imgTandooriChicken,
+        image: "https://images.unsplash.com/Xns5s92Ipcc?w=600&auto=format&fit=crop",
         rating: 5,
         veg: false,
         category: "Tandoori Specials",
@@ -314,7 +265,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Creamy, mild tikka with cheese and cream marinade",
         longDescription: "Boneless chicken marinated in a silky blend of cream, cheese, white pepper, and cardamom, then gently cooked in the tandoor.",
         price: 425,
-        image: imgMalaiTikka,
+        image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600&auto=format&fit=crop",
         rating: 4,
         veg: false,
         category: "Tandoori Specials",
@@ -325,7 +276,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Jumbo prawns marinated in spiced yogurt, chargrilled",
         longDescription: "Premium jumbo prawns marinated in hung curd, ajwain, Kashmiri chilli, and lemon. Chargrilled in the tandoor until perfectly succulent.",
         price: 595,
-        image: imgTandooriPrawns,
+        image: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&auto=format&fit=crop",
         rating: 5,
         veg: false,
         category: "Tandoori Specials",
@@ -336,7 +287,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Soft tandoor-baked bread brushed with melted butter",
         longDescription: "Our signature naan is hand-stretched and baked in our clay tandoor until perfectly puffed and lightly charred. Generously brushed with pure butter.",
         price: 75,
-        image: imgButterNaan,
+        image: "https://images.unsplash.com/WrE3ruckrwI?w=600&auto=format&fit=crop",
         rating: 5,
         veg: true,
         category: "Tandoori Specials",
@@ -347,7 +298,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Tandoor-baked naan topped with roasted garlic and cilantro",
         longDescription: "Fluffy naan bread loaded with fragrant roasted garlic, fresh cilantro, and a brushing of butter. The perfect accompaniment to any curry.",
         price: 95,
-        image: imgGarlicNaan,
+        image: "https://images.unsplash.com/h7cZs0aFicw?w=600&auto=format&fit=crop",
         rating: 5,
         veg: true,
         category: "Tandoori Specials",
@@ -364,7 +315,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Fragrant basmati rice tempered with cumin seeds and ghee",
         longDescription: "Premium aged basmati rice cooked to fluffy perfection with whole cumin seeds, bay leaf, and a drizzle of pure ghee. Light and aromatic.",
         price: 195,
-        image: imgJeeraRice,
+        image: "https://images.unsplash.com/uZ3XaE_uKbQ?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Rice & Pulao",
@@ -375,7 +326,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Aromatic basmati rice cooked with seasonal vegetables and spices",
         longDescription: "A fragrant one-pot dish with basmati rice, garden-fresh vegetables, whole spices, and fried onions. Light yet full of flavour.",
         price: 245,
-        image: imgVegPulao,
+        image: "https://images.unsplash.com/Cgw62rXaPpM?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Rice & Pulao",
@@ -392,7 +343,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Royal bread pudding with saffron rabri and pistachios",
         longDescription: "Crispy fried bread slices soaked in saffron-infused sugar syrup, layered with rich rabri and garnished with pistachios and edible silver leaf.",
         price: 245,
-        image: imgShahiTukda,
+        image: "https://images.unsplash.com/photo-1666887360919-e1cb5c98a9b5?w=600&auto=format&fit=crop",
         rating: 5,
         veg: true,
         category: "Desserts",
@@ -403,7 +354,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Soft milk dumplings in cardamom-rose sugar syrup",
         longDescription: "Golden dumplings made from khoya and paneer, deep-fried until dark golden, then soaked in warm sugar syrup infused with cardamom, rose water, and saffron.",
         price: 195,
-        image: imgGulabJamun,
+        image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=600&auto=format&fit=crop",
         rating: 5,
         veg: true,
         category: "Desserts",
@@ -414,7 +365,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Traditional saffron-pistachio Indian ice cream",
         longDescription: "Full-fat milk reduced for hours until thick and creamy, flavored with premium Kashmiri saffron and cardamom. Set in molds and topped with crushed pistachios.",
         price: 175,
-        image: imgKesarKulfi,
+        image: "https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Desserts",
@@ -431,7 +382,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Spiced buttermilk with cumin, mint, and coriander",
         longDescription: "Chilled churned buttermilk seasoned with roasted cumin, fresh mint, coriander, and a pinch of black salt. The ultimate refresher after a Mughlai meal.",
         price: 95,
-        image: imgMasalaChaas,
+        image: "https://images.unsplash.com/0sz-sfC_ekc?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Beverages",
@@ -442,7 +393,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Creamy Punjabi yogurt drink with a hint of cardamom",
         longDescription: "Thick, creamy yogurt blended with sugar, a touch of cardamom, and rose water. Served chilled with a generous layer of malai on top.",
         price: 125,
-        image: imgSweetLassi,
+        image: "https://images.unsplash.com/vD-wnzsy-k8?w=600&auto=format&fit=crop",
         rating: 5,
         veg: true,
         category: "Beverages",
@@ -453,7 +404,7 @@ export const menuCategories: MenuCategory[] = [
         description: "Traditional salted yogurt drink with roasted cumin",
         longDescription: "A savoury twist on the classic – fresh yogurt churned with rock salt, roasted cumin, and a hint of black pepper. Light and digestive.",
         price: 115,
-        image: imgSaltedLassi,
+        image: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?w=600&auto=format&fit=crop",
         rating: 4,
         veg: true,
         category: "Beverages",
