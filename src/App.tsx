@@ -24,7 +24,7 @@ const App = () => (
       <CartProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename="/nilgar-restaurant-branding">
           <Navbar />
           <Routes>
             <Route path="/" element={<Index />} />
